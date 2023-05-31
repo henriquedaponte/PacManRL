@@ -43,6 +43,7 @@ class QLearningAgent(ReinforcementAgent):
         ReinforcementAgent.__init__(self, **args)
 
         "*** YOUR CODE HERE ***"
+        self.qTable = util.Counter()
 
     def getQValue(self, state, action):
         """
@@ -51,7 +52,12 @@ class QLearningAgent(ReinforcementAgent):
           or the Q node value otherwise
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+
+        # Look up and return desired Q-value from Q-table
+        if (state, action) in self.qTable:
+            return self.qTable[(state, action)]
+        else:
+            return 0.0 # If state has not been visited, return a Q of 0.0
 
 
     def computeValueFromQValues(self, state):
@@ -62,7 +68,18 @@ class QLearningAgent(ReinforcementAgent):
           terminal state, you should return a value of 0.0.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+
+        # Initilizing possible legal actions
+        legalActions = self.getLegalActions(state)
+
+        # If there are no legal actions return 0.0
+        if not legalActions:
+            return 0.0
+
+        # Find the max Q(s, a) over all legal actions
+        value = max(self.getQValue(state, action) for action in legalActions)
+
+        return value
 
     def computeActionFromQValues(self, state):
         """
@@ -71,7 +88,30 @@ class QLearningAgent(ReinforcementAgent):
           you should return None.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        import numpy as np
+
+        # initilizing list of possible legalActions
+        legalActions = self.getLegalActions(state)
+
+        # Initializing variables for holding the optimal action and its respective Q (should be the highest Q in legalActions)
+        highQ = np.NINF
+        optAct = None
+
+        # Iterate over legalActions and find the actions with highest Q (optimal action)
+        for action in legalActions:
+            
+            currQ = self.getQValue(state, action)
+            if currQ > highQ:
+                optAct = action
+                highQ = currQ
+
+            # In case of a tie pick randonly
+            if currQ == highQ:
+                randomize = [action, optAct]
+                optAct = random.choice(randomize)
+                
+        # Return optimal action
+        return optAct
 
     def getAction(self, state):
         """
@@ -102,7 +142,12 @@ class QLearningAgent(ReinforcementAgent):
           it will be called on your behalf
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+
+        q = self.getQValue(state, action)
+        qPrime = self.computeValueFromQValues(nextState)
+
+        self.qTable[(state, action)] = (1 - self.alpha) * q + self.alpha * (reward + self.discount * qPrime )
+
 
     def getPolicy(self, state):
         return self.computeActionFromQValues(state)
