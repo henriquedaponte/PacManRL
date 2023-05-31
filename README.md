@@ -76,3 +76,9 @@ def computeValueFromQValues(self, state):
           You should do your Q-Value update here
         """
 
+
+v5 (05/31/2023):
+
+in qlearningAgents.py:
+
+implemented getAction() method to follow epsilon-greedy
