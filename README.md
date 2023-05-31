@@ -35,3 +35,44 @@ def question3c(): Agent would prefer the distant exit (+10), risking the cliff (
 def question3d(): Agent would prefer the distant exit (+10), avoiding the cliff (-10)
 
 def question3e(): Agent would avoid both exits and the cliff (so an episode should never terminate)
+
+
+v4 (05/31/2023)
+
+in qlearningAgents.py:
+
+Wrote the following methods of the class QLearningAgent:
+
+def __init__(self, **args):
+        "You can initialize Q-values here..."
+    
+
+def getQValue(self, state, action):
+        """
+          Returns Q(state,action)
+          Should return 0.0 if we have never seen a state
+          or the Q node value otherwise
+        """
+        
+def computeValueFromQValues(self, state):
+        """
+          Returns max_action Q(state,action)
+          where the max is over legal actions.  Note that if
+          there are no legal actions, which is the case at the
+          terminal state, you should return a value of 0.0.
+        """
+        
+  def computeActionFromQValues(self, state):
+       """
+         Compute the best action to take in a state.  Note that if there
+         are no legal actions, which is the case at the terminal state,
+         you should return None.
+       """
+       
+ def update(self, state, action, nextState, reward):
+        """
+          The parent class calls this to observe a
+          state = action => nextState and reward transition.
+          You should do your Q-Value update here
+        """
+
