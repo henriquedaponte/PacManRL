@@ -78,15 +78,11 @@ class ValueIterationAgent(ValueEstimationAgent):
             # Update values
             self.values = newValues
 
-
-
-
     def getValue(self, state):
         """
           Return the value of the state (computed in __init__).
         """
         return self.values[state]
-
 
     def computeQValueFromValues(self, state, action):
         """
@@ -95,7 +91,7 @@ class ValueIterationAgent(ValueEstimationAgent):
         """
         "*** YOUR CODE HERE ***"
        
-        # Initializing Q value variab;e
+        # Initializing Q value variable
         qValue = 0
             
         for nextState, prob in self.mdp.getTransitionStatesAndProbs(state, action):
