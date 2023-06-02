@@ -82,3 +82,5 @@ v5 (05/31/2023):
 in qlearningAgents.py:
 
 implemented getAction() method to follow epsilon-greedy
+
+v6 (0/02/2023)
