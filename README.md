@@ -83,4 +83,10 @@ in qlearningAgents.py:
 
 implemented getAction() method to follow epsilon-greedy
 
-v6 (0/02/2023)
+# FINAL VERSION (06/05/2023)
+
+in qlearningAgents.py
+
+Improved the Q-Learning agent to use linear function approximation (reduced the number of required training episodes by a factor of 5 approximately) by implementing the following class
+
+class ApproximateQAgent(PacmanQAgent)
